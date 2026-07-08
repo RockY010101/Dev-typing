@@ -1,0 +1,111 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+function practice() {
+  const [selectedLang, setSelectedLang] = useState(null);
+  const [selectedDiff, setSelectedDiff] = useState(null);
+  const navigate = useNavigate();
+
+  const handleClose = () => {
+    navigate('/');
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        handleClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    
+    // Disable scrolling on the body when modal is open
+    document.body.style.overflow = 'hidden';
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
+  const languages = [
+    { id: 'js', name: 'JavaScript', color: '#facc15', shape: 'square' },
+    { id: 'py', name: 'Python', color: '#10b981', shape: 'circle' },
+    { id: 'java', name: 'Java', color: '#ea580c', shape: 'leaf' },
+    { id: 'cpp', name: 'C++', color: '#6366f1', shape: 'diamond' },
+    { id: 'sql', name: 'SQL', color: '#8b5cf6', shape: 'rectangle' }
+  ];
+
+  const difficulties = [
+    { id: 'easy', name: 'Easy', desc: 'Short snippets, basic syntax', colorClass: 'text-easy' },
+    { id: 'medium', name: 'Medium', desc: 'Functions, loops, and logic', colorClass: 'text-medium' },
+    { id: 'hard', name: 'Hard', desc: 'Complex patterns & algorithms', colorClass: 'text-hard' }
+  ];
+
+  const getShapeStyle = (shape) => {
+    switch (shape) {
+      case 'square': return {};
+      case 'circle': return { borderRadius: '50%' };
+      case 'leaf': return { borderRadius: '50% 0 50% 50%' };
+      case 'diamond': return { transform: 'rotate(45deg)' };
+      case 'rectangle': return { borderRadius: '2px', width: '16px' };
+      default: return {};
+    }
+  };
+
+  const isStartEnabled = selectedLang !== null && selectedDiff !== null;
+
+  return (
+    <div className="practice-modal-overlay" onClick={handleClose}>
+      <div className="practice-card modal-animate" onClick={(e) => e.stopPropagation()}>
+        <div className="practice-header">
+          <h1 className="practice-title">DevType</h1>
+          <p className="practice-subtitle">Type real code. Build real speed.</p>
+        </div>
+
+        <div className="practice-section">
+          <h2 className="section-title">LANGUAGE</h2>
+          <div className="options-group">
+            {languages.map((lang) => (
+              <button 
+                key={lang.id}
+                className={`lang-btn ${selectedLang === lang.id ? 'active' : ''}`}
+                onClick={() => setSelectedLang(lang.id)}
+              >
+                <span 
+                  className="lang-icon" 
+                  style={{ backgroundColor: lang.color, ...getShapeStyle(lang.shape) }}
+                ></span>
+                {lang.name}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="practice-section">
+          <h2 className="section-title">DIFFICULTY</h2>
+          <div className="options-group difficulty-group">
+            {difficulties.map((diff) => (
+              <button 
+                key={diff.id}
+                className={`diff-btn ${selectedDiff === diff.id ? 'active' : ''}`}
+                onClick={() => setSelectedDiff(diff.id)}
+              >
+                <div className={`diff-title ${diff.colorClass}`}>{diff.name}</div>
+                <div className="diff-desc">{diff.desc}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <button 
+          className="start-typing-btn"
+          disabled={!isStartEnabled}
+        >
+          Start Typing &rarr;
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default practice;
