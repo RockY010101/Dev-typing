@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import TypingArea from '../components/TypingArea';
 
 function practice() {
   const [selectedLang, setSelectedLang] = useState(null);
   const [selectedDiff, setSelectedDiff] = useState(null);
+  const [isTypingStarted, setIsTypingStarted] = useState(false);
   const navigate = useNavigate();
 
   const handleClose = () => {
@@ -57,7 +59,15 @@ function practice() {
   return (
     <div className="practice-modal-overlay" onClick={handleClose}>
       <div className="practice-card modal-animate" onClick={(e) => e.stopPropagation()}>
-        <div className="practice-header">
+        {isTypingStarted ? (
+          <TypingArea 
+            language={selectedLang} 
+            difficulty={selectedDiff} 
+            onGoBack={() => setIsTypingStarted(false)} 
+          />
+        ) : (
+          <>
+            <div className="practice-header">
           <h1 className="practice-title">DevType</h1>
           <p className="practice-subtitle">Type real code. Build real speed.</p>
         </div>
@@ -100,9 +110,12 @@ function practice() {
         <button 
           className="start-typing-btn"
           disabled={!isStartEnabled}
+          onClick={() => setIsTypingStarted(true)}
         >
           Start Typing &rarr;
         </button>
+          </>
+        )}
       </div>
     </div>
   );
