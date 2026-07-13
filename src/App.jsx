@@ -5,7 +5,7 @@ import Home from './pages/home'
 import Practice from './pages/practice'
 import Header from './components/header'
 import bgImage from './assets/background.png'
-import GoogleAuth from './components/GoogleOath'
+import Register from './pages/register'
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Practice" element={<><Home /><Practice /></>} />
-          <Route path="/register" element={<GoogleAuth />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </main>
     </div>

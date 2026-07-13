@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function GoogleAuth() {
     const [user, setUser] = useState(null);
     const [profile, setProfile] = useState(null);
+    const navigate = useNavigate();
 
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => setUser(codeResponse),
@@ -22,6 +24,7 @@ export default function GoogleAuth() {
             )
                 .then((res) => {
                     setProfile(res.data);
+                    navigate('/register');
                 })
                 .catch((err) => console.log(err));
         }
@@ -47,7 +50,7 @@ export default function GoogleAuth() {
                     <button className="nav-link" onClick={() => login()} style={{ cursor: 'pointer' }}>
                         login
                     </button>
-                    <button className="nav-link" style={{ cursor: 'pointer' }}>
+                    <button className="nav-link" onClick={() => navigate('/register')} style={{ cursor: 'pointer' }}>
                         register
                     </button>
                 </>
