@@ -7,16 +7,35 @@ const jsEasySnippets = [
   "const items = [1, 2, 3];\nitems.forEach(item => {\n  console.log(item);\n});"
 ];
 
+const jsMediumSnippets = [
+  "const numbers = [1, 2, 3, 4, 5];\nconst evens = numbers.filter(n => n % 2 === 0);\nconsole.log(evens);",
+  "async function fetchData(url) {\n  const response = await fetch(url);\n  return await response.json();\n}",
+  "class Animal {\n  constructor(name) {\n    this.name = name;\n  }\n  speak() {\n    console.log(`${this.name} makes a noise.`);\n  }\n}"
+];
+
+const jsHardSnippets = [
+  "function debounce(func, wait) {\n  let timeout;\n  return function executedFunction(...args) {\n    const later = () => {\n      clearTimeout(timeout);\n      func(...args);\n    };\n    clearTimeout(timeout);\n    timeout = setTimeout(later, wait);\n  };\n}",
+  "const memoize = (fn) => {\n  const cache = new Map();\n  return (...args) => {\n    const key = JSON.stringify(args);\n    if (cache.has(key)) return cache.get(key);\n    const result = fn(...args);\n    cache.set(key, result);\n    return result;\n  };\n};"
+];
+
 function TypingArea({ language, difficulty, onGoBack }) {
   const [snippet, setSnippet] = useState('');
   const [userInput, setUserInput] = useState('');
   const inputRef = useRef(null);
 
   useEffect(() => {
-    // Only JS Easy is currently implemented
-    if (language === 'js' && difficulty === 'easy') {
-      const randomSnippet = jsEasySnippets[Math.floor(Math.random() * jsEasySnippets.length)];
-      setSnippet(randomSnippet);
+    if (language === 'js') {
+      let snippets = [];
+      if (difficulty === 'easy') snippets = jsEasySnippets;
+      else if (difficulty === 'medium') snippets = jsMediumSnippets;
+      else if (difficulty === 'hard') snippets = jsHardSnippets;
+      
+      if (snippets.length > 0) {
+        const randomSnippet = snippets[Math.floor(Math.random() * snippets.length)];
+        setSnippet(randomSnippet);
+      } else {
+        setSnippet(`// Snippets for ${language} - ${difficulty} coming soon!\n// Try JavaScript Easy for now.`);
+      }
     } else {
       setSnippet(`// Snippets for ${language} - ${difficulty} coming soon!\n// Try JavaScript Easy for now.`);
     }
