@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TypingArea from '../components/TypingArea';
+import { FaJs, FaPython, FaJava } from 'react-icons/fa6';
+import { SiCplusplus } from 'react-icons/si';
 
 function practice() {
   const [selectedLang, setSelectedLang] = useState(null);
@@ -30,10 +32,10 @@ function practice() {
   }, []);
 
   const languages = [
-    { id: 'js', name: 'JavaScript', color: '#facc15', shape: 'square' },
-    { id: 'py', name: 'Python', color: '#10b981', shape: 'circle' },
-    { id: 'java', name: 'Java', color: '#ea580c', shape: 'leaf' },
-    { id: 'cpp', name: 'C++', color: '#6366f1', shape: 'diamond' }
+    { id: 'js', name: 'JavaScript', color: '#facc15', Icon: FaJs },
+    { id: 'py', name: 'Python', color: '#10b981', Icon: FaPython },
+    { id: 'java', name: 'Java', color: '#ea580c', Icon: FaJava },
+    { id: 'cpp', name: 'C++', color: '#6366f1', Icon: SiCplusplus }
   ];
 
   const difficulties = [
@@ -42,16 +44,7 @@ function practice() {
     { id: 'hard', name: 'Hard', desc: 'Complex patterns & algorithms', colorClass: 'text-hard' }
   ];
 
-  const getShapeStyle = (shape) => {
-    switch (shape) {
-      case 'square': return {};
-      case 'circle': return { borderRadius: '50%' };
-      case 'leaf': return { borderRadius: '50% 0 50% 50%' };
-      case 'diamond': return { transform: 'rotate(45deg)' };
-      case 'rectangle': return { borderRadius: '2px', width: '16px' };
-      default: return {};
-    }
-  };
+
 
   const isStartEnabled = selectedLang !== null && selectedDiff !== null;
 
@@ -80,10 +73,10 @@ function practice() {
                 className={`lang-btn ${selectedLang === lang.id ? 'active' : ''}`}
                 onClick={() => setSelectedLang(lang.id)}
               >
-                <span 
+                <lang.Icon 
                   className="lang-icon" 
-                  style={{ backgroundColor: lang.color, ...getShapeStyle(lang.shape) }}
-                ></span>
+                  style={{ color: lang.color }}
+                />
                 {lang.name}
               </button>
             ))}

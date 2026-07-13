@@ -249,15 +249,16 @@ html, body, #root {
 }
 
 .lang-icon {
-  width: 14px;
-  height: 14px;
-  display: inline-block;
-  border-radius: 3px;
-  box-shadow: 0 0 8px currentColor;
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 4px currentColor);
 }
 
 .lang-btn.active .lang-icon {
-  box-shadow: 0 0 12px #f97316;
+  filter: drop-shadow(0 0 8px #f97316);
 }
 
 .diff-title {
