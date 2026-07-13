@@ -33,8 +33,7 @@ function practice() {
     { id: 'js', name: 'JavaScript', color: '#facc15', shape: 'square' },
     { id: 'py', name: 'Python', color: '#10b981', shape: 'circle' },
     { id: 'java', name: 'Java', color: '#ea580c', shape: 'leaf' },
-    { id: 'cpp', name: 'C++', color: '#6366f1', shape: 'diamond' },
-    { id: 'sql', name: 'SQL', color: '#8b5cf6', shape: 'rectangle' }
+    { id: 'cpp', name: 'C++', color: '#6366f1', shape: 'diamond' }
   ];
 
   const difficulties = [
