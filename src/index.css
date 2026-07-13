@@ -424,3 +424,28 @@ html, body, #root {
   resize: none;
   z-index: -1;
 }
+
+.custom-input {
+  background: rgba(10, 10, 10, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 1rem;
+  font-family: monospace;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  width: 100%;
+  margin-bottom: 1rem;
+  text-align: center;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
+
+.custom-input:focus {
+  outline: none;
+  border-color: #f97316;
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.3);
+}
+
+.custom-input::placeholder {
+  color: #6b7280;
+}
