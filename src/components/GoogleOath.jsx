@@ -5,7 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 export default function GoogleAuth() {
     const [user, setUser] = useState(null);
-    const [profile, setProfile] = useState(null);
+    const [profile, setProfile] = useState(() => {
+        const savedProfile = localStorage.getItem('profile');
+        return savedProfile ? JSON.parse(savedProfile) : null;
+    });
     const navigate = useNavigate();
 
     const login = useGoogleLogin({
@@ -24,6 +27,7 @@ export default function GoogleAuth() {
             )
                 .then((res) => {
                     setProfile(res.data);
+                    localStorage.setItem('profile', JSON.stringify(res.data));
                     if (window.location.pathname === '/register') {
                         navigate('/');
                     }
@@ -36,6 +40,7 @@ export default function GoogleAuth() {
         googleLogout();
         setProfile(null);
         setUser(null);
+        localStorage.removeItem('profile');
     };
 
     return (

@@ -5,7 +5,6 @@ function Register() {
     <div className="home-container">
       <div className="practice-card modal-animate" style={{ maxWidth: '500px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <h2 className="practice-title" style={{ fontSize: '2rem', marginBottom: '1rem' }}>REGISTER</h2>
-        <p className="practice-subtitle" style={{ marginBottom: '2rem' }}>Sign in to continue</p>
         <GoogleAuth />
       </div>
     </div>
