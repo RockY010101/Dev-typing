@@ -1,35 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TypingArea from '../components/TypingArea';
 import { FaJs, FaPython, FaJava } from 'react-icons/fa6';
 import { SiCplusplus } from 'react-icons/si';
 
 function Practice() {
   const [selectedLang, setSelectedLang] = useState(null);
   const [selectedDiff, setSelectedDiff] = useState(null);
-  const [isTypingStarted, setIsTypingStarted] = useState(false);
   const navigate = useNavigate();
-
-  const handleClose = useCallback(() => {
-    navigate('/');
-  }, [navigate]);
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        handleClose();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    
-    // Disable scrolling on the body when modal is open
-    document.body.style.overflow = 'hidden';
-    
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'unset';
-    };
-  }, [handleClose]);
 
   const languages = [
     { id: 'js', name: 'JavaScript', color: '#facc15', Icon: FaJs },
@@ -44,22 +21,16 @@ function Practice() {
     { id: 'hard', name: 'Hard', desc: 'Complex patterns & algorithms', colorClass: 'text-hard' }
   ];
 
-
-
   const isStartEnabled = selectedLang !== null && selectedDiff !== null;
 
+  const handleStartTyping = () => {
+    navigate('/typing', { state: { language: selectedLang, difficulty: selectedDiff } });
+  };
+
   return (
-    <div className="practice-modal-overlay" onClick={handleClose}>
-      <div className="practice-card modal-animate" onClick={(e) => e.stopPropagation()}>
-        {isTypingStarted ? (
-          <TypingArea 
-            language={selectedLang} 
-            difficulty={selectedDiff} 
-            onGoBack={() => setIsTypingStarted(false)} 
-          />
-        ) : (
-          <>
-            <div className="practice-header">
+    <div className="page-container">
+      <div className="practice-card">
+        <div className="practice-header">
           <h1 className="practice-title">DevType</h1>
           <p className="practice-subtitle">Type real code. Build real speed.</p>
         </div>
@@ -102,12 +73,10 @@ function Practice() {
         <button 
           className="start-typing-btn"
           disabled={!isStartEnabled}
-          onClick={() => setIsTypingStarted(true)}
+          onClick={handleStartTyping}
         >
           Start Typing &rarr;
         </button>
-          </>
-        )}
       </div>
     </div>
   );

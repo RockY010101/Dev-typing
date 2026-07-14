@@ -11,7 +11,7 @@ function home() {
           Boost your writing with fun games!
         </p>
         <Link 
-          to="/Practice" 
+          to="/practice" 
           className="start-button"
         >
           START PLAYING &rarr;

@@ -69,10 +69,15 @@ const snippetsData = {
   }
 };
 
-function TypingArea({ language, difficulty, onGoBack }) {
+function TypingArea({ language, difficulty, onComplete }) {
   const [snippet, setSnippet] = useState('');
   const [userInput, setUserInput] = useState('');
   const inputRef = useRef(null);
+
+  // Metrics state
+  const [startTime, setStartTime] = useState(null);
+  const [totalErrors, setTotalErrors] = useState(0);
+  const [isFinished, setIsFinished] = useState(false);
 
   useEffect(() => {
     const langData = snippetsData[language];
@@ -87,25 +92,61 @@ function TypingArea({ language, difficulty, onGoBack }) {
     } else {
       setSnippet(`// Language ${language} not found!`);
     }
-    // Reset user input when changing snippet
+    // Reset state when snippet changes
     setUserInput('');
+    setStartTime(null);
+    setTotalErrors(0);
+    setIsFinished(false);
   }, [language, difficulty]);
 
   useEffect(() => {
-    if (inputRef.current) {
+    if (inputRef.current && !isFinished) {
       inputRef.current.focus();
     }
-  }, [snippet]);
+  }, [snippet, isFinished]);
 
   const handleInputChange = (e) => {
-    // Prevent typing beyond the snippet length
-    if (e.target.value.length <= snippet.length) {
-      setUserInput(e.target.value);
+    if (isFinished) return;
+
+    const val = e.target.value;
+    
+    // Start timer on first keystroke
+    if (!startTime && val.length > 0) {
+      setStartTime(Date.now());
+    }
+
+    // Check if new keystroke is an error
+    if (val.length > userInput.length) {
+      const charIndex = val.length - 1;
+      if (val[charIndex] !== snippet[charIndex]) {
+        setTotalErrors(prev => prev + 1);
+      }
+    }
+
+    if (val.length <= snippet.length) {
+      setUserInput(val);
+      
+      // Check if finished
+      if (val.length === snippet.length) {
+        const finishTime = Date.now();
+        setIsFinished(true);
+
+        const timeTakenMinutes = (finishTime - (startTime || Date.now())) / 60000;
+        const wordsTyped = snippet.length / 5;
+        const wpm = Math.round(wordsTyped / timeTakenMinutes) || 0;
+        
+        // Ensure accuracy doesn't go below 0
+        const accuracy = Math.max(0, Math.round(((snippet.length - totalErrors) / snippet.length) * 100));
+        
+        if (onComplete) {
+          onComplete({ wpm, accuracy });
+        }
+      }
     }
   };
 
   const handleContainerClick = () => {
-    if (inputRef.current) {
+    if (inputRef.current && !isFinished) {
       inputRef.current.focus();
     }
   };
@@ -132,8 +173,7 @@ function TypingArea({ language, difficulty, onGoBack }) {
 
   return (
     <div className="typing-area-wrapper" onClick={handleContainerClick}>
-      <div className="typing-area-header">
-        <button onClick={onGoBack} className="go-back-btn">&larr; BACK</button>
+      <div className="typing-area-header" style={{ justifyContent: 'flex-end' }}>
         <div className="typing-stats">
           <span>{Math.round((userInput.length / snippet.length) * 100 || 0)}%</span>
         </div>
