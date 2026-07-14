@@ -5,7 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 export default function GoogleAuth() {
     const [user, setUser] = useState(null);
-    const [profile, setProfile] = useState(null);
+    const [profile, setProfile] = useState(() => {
+        const savedProfile = localStorage.getItem('profile');
+        return savedProfile ? JSON.parse(savedProfile) : null;
+    });
     const navigate = useNavigate();
 
     const login = useGoogleLogin({
@@ -24,16 +27,20 @@ export default function GoogleAuth() {
             )
                 .then((res) => {
                     setProfile(res.data);
-                    navigate('/register');
+                    localStorage.setItem('profile', JSON.stringify(res.data));
+                    if (window.location.pathname === '/register') {
+                        navigate('/');
+                    }
                 })
                 .catch((err) => console.log(err));
         }
-    }, [user]);
+    }, [user, navigate]);
 
     const logOut = () => {
         googleLogout();
         setProfile(null);
         setUser(null);
+        localStorage.removeItem('profile');
     };
 
     return (
@@ -46,16 +53,10 @@ export default function GoogleAuth() {
                     </button>
                 </>
             ) : (
-                <>
-                    <button className="nav-link" onClick={() => login()} style={{ cursor: 'pointer' }}>
-                        login
-                    </button>
-                    <button className="nav-link" onClick={() => navigate('/register')} style={{ cursor: 'pointer' }}>
-                        register
-                    </button>
-                </>
-            )
-            }
-        </div >
+                <button className="nav-link" onClick={() => login()} style={{ cursor: 'pointer' }}>
+                    Sign in with Google
+                </button>
+            )}
+        </div>
     );
 }

@@ -4,7 +4,9 @@
   font-family: 'Press Start 2P', monospace !important;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   font-family: sans-serif;
@@ -87,7 +89,7 @@ html, body, #root {
   font-weight: bold;
   letter-spacing: 0.1em;
   color: white;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .start-button {
@@ -130,6 +132,7 @@ html, body, #root {
     opacity: 0;
     transform: scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -204,7 +207,8 @@ html, body, #root {
   gap: 1rem;
 }
 
-.lang-btn, .diff-btn {
+.lang-btn,
+.diff-btn {
   background: linear-gradient(145deg, #2a221f, #1e1816);
   border: 1px solid #3d2f2b;
   border-bottom: 4px solid #140f0e;
@@ -212,7 +216,7 @@ html, body, #root {
   color: #d1d5db;
   cursor: pointer;
   transition: all 0.15s ease;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
   position: relative;
 }
 
@@ -233,18 +237,20 @@ html, body, #root {
   text-align: left;
 }
 
-.lang-btn:hover, .diff-btn:hover {
+.lang-btn:hover,
+.diff-btn:hover {
   transform: translateY(1px);
   border-bottom: 3px solid #140f0e;
-  box-shadow: 0 3px 5px rgba(0,0,0,0.5), 0 0 15px rgba(249, 115, 22, 0.15);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(249, 115, 22, 0.15);
 }
 
-.lang-btn.active, .diff-btn.active {
+.lang-btn.active,
+.diff-btn.active {
   transform: translateY(3px);
   border-bottom: 1px solid #140f0e;
   background: linear-gradient(145deg, #38251b, #2a1b15);
   border-color: #f97316;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.5), 0 0 20px rgba(249, 115, 22, 0.3), inset 0 0 10px rgba(249, 115, 22, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 0 20px rgba(249, 115, 22, 0.3), inset 0 0 10px rgba(249, 115, 22, 0.1);
   color: #f97316;
 }
 
@@ -268,9 +274,17 @@ html, body, #root {
   font-family: monospace;
 }
 
-.diff-title.text-easy { color: #22c55e; }
-.diff-title.text-medium { color: #eab308; }
-.diff-title.text-hard { color: #ef4444; }
+.diff-title.text-easy {
+  color: #22c55e;
+}
+
+.diff-title.text-medium {
+  color: #eab308;
+}
+
+.diff-title.text-hard {
+  color: #ef4444;
+}
 
 .diff-btn.active .diff-title {
   color: #f97316;
@@ -293,7 +307,7 @@ html, body, #root {
   width: 100%;
   padding: 1.25rem;
   border-radius: 8px;
-  border: 2px solid rgba(255,255,255,0.2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   font-weight: 700;
   font-size: 14px;
   color: white;
@@ -302,7 +316,7 @@ html, body, #root {
   transition: all 0.2s;
   margin-top: 1rem;
   font-family: '"Press Start 2P", monospace';
-  box-shadow: 0 4px 15px rgba(234, 88, 12, 0.4), inset 0 2px 4px rgba(255,255,255,0.2);
+  box-shadow: 0 4px 15px rgba(234, 88, 12, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.2);
   text-transform: uppercase;
 }
 
@@ -319,15 +333,16 @@ html, body, #root {
 
 @keyframes subtleGlow {
   from {
-    box-shadow: 0 4px 15px rgba(234, 88, 12, 0.4), inset 0 2px 4px rgba(255,255,255,0.2);
+    box-shadow: 0 4px 15px rgba(234, 88, 12, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.2);
   }
+
   to {
-    box-shadow: 0 4px 25px rgba(139, 92, 246, 0.6), inset 0 2px 4px rgba(255,255,255,0.3);
+    box-shadow: 0 4px 25px rgba(139, 92, 246, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.3);
   }
 }
 
 .start-typing-btn:not(:disabled):hover {
-  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6), inset 0 2px 4px rgba(255,255,255,0.3);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
 }
 
@@ -410,8 +425,15 @@ html, body, #root {
 }
 
 @keyframes cursorBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .typing-hidden-input {
