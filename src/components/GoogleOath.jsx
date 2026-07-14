@@ -24,11 +24,13 @@ export default function GoogleAuth() {
             )
                 .then((res) => {
                     setProfile(res.data);
-                    navigate('/register');
+                    if (window.location.pathname === '/register') {
+                        navigate('/');
+                    }
                 })
                 .catch((err) => console.log(err));
         }
-    }, [user]);
+    }, [user, navigate]);
 
     const logOut = () => {
         googleLogout();
@@ -46,16 +48,10 @@ export default function GoogleAuth() {
                     </button>
                 </>
             ) : (
-                <>
-                    <button className="nav-link" onClick={() => login()} style={{ cursor: 'pointer' }}>
-                        login
-                    </button>
-                    <button className="nav-link" onClick={() => navigate('/register')} style={{ cursor: 'pointer' }}>
-                        register
-                    </button>
-                </>
-            )
-            }
-        </div >
+                <button className="nav-link" onClick={() => login()} style={{ cursor: 'pointer' }}>
+                    Sign in with Google
+                </button>
+            )}
+        </div>
     );
 }
