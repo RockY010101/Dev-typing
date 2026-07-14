@@ -1,7 +1,7 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import GoogleAuth from "./GoogleOath";
 
-function header() {
+function Header() {
     const location = useLocation();
     const isPracticeOpen = location.pathname === '/Practice';
 
@@ -15,4 +15,4 @@ function header() {
         </header>
     );
 }
-export default header;
+export default Header;

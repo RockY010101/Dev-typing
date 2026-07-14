@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TypingArea from '../components/TypingArea';
 import { FaJs, FaPython, FaJava } from 'react-icons/fa6';
 import { SiCplusplus } from 'react-icons/si';
 
-function practice() {
+function Practice() {
   const [selectedLang, setSelectedLang] = useState(null);
   const [selectedDiff, setSelectedDiff] = useState(null);
   const [isTypingStarted, setIsTypingStarted] = useState(false);
   const navigate = useNavigate();
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     navigate('/');
-  };
+  }, [navigate]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -29,7 +29,7 @@ function practice() {
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'unset';
     };
-  }, []);
+  }, [handleClose]);
 
   const languages = [
     { id: 'js', name: 'JavaScript', color: '#facc15', Icon: FaJs },
@@ -113,4 +113,4 @@ function practice() {
   );
 }
 
-export default practice;
+export default Practice;
