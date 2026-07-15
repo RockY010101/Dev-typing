@@ -8,7 +8,7 @@ dotenv.config();
 
 // Connect to database
 
-// connectDB();
+connectDB();
 
 const app = express();
 
@@ -16,10 +16,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+import userRoutes from './routes/userRoutes.js';
+import resultRoutes from './routes/resultRoutes.js';
+
 // Basic route
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
+
+// Routes
+app.use('/api/users', userRoutes);
+app.use('/api/results', resultRoutes);
 
 const PORT = process.env.PORT || 5000;
 

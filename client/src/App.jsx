@@ -7,6 +7,7 @@ import Typing from './pages/typing'
 import Result from './pages/result'
 import Header from './components/header'
 import Register from './pages/register'
+import Profile from './pages/profile'
 import bgImage from './assets/background.png'
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/typing" element={<Typing />} />
           <Route path="/result" element={<Result />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </main>
     </div>

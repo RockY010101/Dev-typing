@@ -212,6 +212,47 @@ function TypingArea({ language, difficulty, onComplete }) {
         className="typing-hidden-input"
         value={userInput}
         onChange={handleInputChange}
+        onKeyDown={(e) => {
+          if (e.key === 'Tab') {
+            e.preventDefault();
+            if (isFinished) return;
+
+            // Figure out how many spaces the snippet expects at this position
+            const pos = userInput.length;
+            let spaces = 0;
+            while (pos + spaces < snippet.length && snippet[pos + spaces] === ' ') {
+              spaces++;
+            }
+            if (spaces === 0) spaces = 2; // fallback
+
+            const syntheticVal = userInput + ' '.repeat(spaces);
+            if (syntheticVal.length <= snippet.length) {
+              // Count errors for each space that doesn't match
+              let newErrors = 0;
+              for (let i = 0; i < spaces; i++) {
+                if (snippet[pos + i] !== ' ') newErrors++;
+              }
+              if (newErrors > 0) setTotalErrors(prev => prev + newErrors);
+
+              setUserInput(syntheticVal);
+
+              if (!startTime) setStartTime(Date.now());
+
+              if (syntheticVal.length === snippet.length) {
+                const finishTime = Date.now();
+                setIsFinished(true);
+                clearInterval(timerRef.current);
+                const timeTakenMs = finishTime - (startTime || finishTime);
+                const timeTakenSeconds = Math.round(timeTakenMs / 1000);
+                setElapsed(timeTakenSeconds);
+                const wordsTyped = snippet.length / 5;
+                const wpm = Math.round(wordsTyped / ((timeTakenMs / 60000) || 1)) || 0;
+                const accuracy = Math.max(0, Math.round(((snippet.length - totalErrors) / snippet.length) * 100));
+                if (onComplete) onComplete({ wpm, accuracy, timeTaken: timeTakenSeconds });
+              }
+            }
+          }
+        }}
         autoComplete="off"
         spellCheck="false"
       />
