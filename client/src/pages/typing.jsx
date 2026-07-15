@@ -16,7 +16,7 @@ function Typing() {
   }, [language, difficulty, navigate]);
 
   const handleComplete = (metrics) => {
-    navigate('/result', { state: { wpm: metrics.wpm, accuracy: metrics.accuracy }, replace: true });
+    navigate('/result', { state: { wpm: metrics.wpm, accuracy: metrics.accuracy, timeTaken: metrics.timeTaken }, replace: true });
   };
 
   const handleGoBack = () => {

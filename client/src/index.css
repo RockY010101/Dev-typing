@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 * {
   font-family: 'Press Start 2P', monospace !important;
@@ -119,7 +120,7 @@ body,
   justify-content: center;
   flex-grow: 1;
   padding: 2rem;
-  background-color: #0f0a0a;
+  background-color: transparent;
 }
 
 .practice-card {
@@ -339,6 +340,8 @@ body,
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  overflow: hidden;
+  max-width: 100%;
 }
 
 .go-back-btn {
@@ -359,9 +362,21 @@ body,
 }
 
 .typing-stats {
-  font-family: '"Press Start 2P", monospace';
+  font-family: 'Press Start 2P', monospace !important;
   color: #f97316;
-  font-size: 1rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.typing-timer {
+  font-family: 'JetBrains Mono', monospace !important;
+  color: #a78bfa;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
 .typing-code-display {
@@ -369,7 +384,7 @@ body,
   padding: 2rem;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  font-family: monospace;
+  font-family: 'JetBrains Mono', monospace !important;
   font-size: 1.5rem;
   line-height: 1.5;
   white-space: pre-wrap;
@@ -378,7 +393,7 @@ body,
 }
 
 .typing-char {
-  font-family: monospace;
+  font-family: 'JetBrains Mono', monospace !important;
 }
 
 .typing-char-untyped {
@@ -431,7 +446,7 @@ body,
   border: 2px solid rgba(255, 255, 255, 0.2);
   color: white;
   padding: 1rem;
-  font-family: monospace;
+  font-family: 'JetBrains Mono', monospace !important;
   font-size: 1.2rem;
   border-radius: 8px;
   width: 100%;

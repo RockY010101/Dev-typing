@@ -5,7 +5,7 @@ function Result() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { wpm, accuracy } = location.state || {};
+  const { wpm, accuracy, timeTaken } = location.state || {};
 
   useEffect(() => {
     // If accessed directly without state, redirect to practice
@@ -28,6 +28,12 @@ function Result() {
           <div style={{ backgroundColor: 'rgba(30, 20, 15, 0.95)', border: '1px solid rgba(249, 115, 22, 0.25)', padding: '2rem', borderRadius: '24px', width: '200px', textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }}>
             <div style={{ fontSize: '3rem', fontWeight: 'bold', color: '#facc15', marginBottom: '0.5rem', fontFamily: 'monospace' }}>{accuracy}%</div>
             <div style={{ color: '#9ca3af', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'sans-serif', fontWeight: 'bold' }}>Accuracy</div>
+          </div>
+          <div style={{ backgroundColor: 'rgba(30, 20, 15, 0.95)', border: '1px solid rgba(249, 115, 22, 0.25)', padding: '2rem', borderRadius: '24px', width: '200px', textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }}>
+            <div style={{ fontSize: '3rem', fontWeight: 'bold', color: '#34d399', marginBottom: '0.5rem', fontFamily: 'monospace' }}>
+              {String(Math.floor((timeTaken || 0) / 60)).padStart(2, '0')}:{String((timeTaken || 0) % 60).padStart(2, '0')}
+            </div>
+            <div style={{ color: '#9ca3af', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'sans-serif', fontWeight: 'bold' }}>Time</div>
           </div>
         </div>
         <div style={{ textAlign: 'center' }}>

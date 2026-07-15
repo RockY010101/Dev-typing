@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import Home from './pages/home'
 import Practice from './pages/practice'
@@ -10,16 +10,11 @@ import Register from './pages/register'
 import bgImage from './assets/background.png'
 
 function App() {
-  const location = useLocation();
-  const isHomePage = location.pathname === '/';
 
   return (
     <div 
       className="app-container"
-      style={isHomePage 
-        ? { backgroundImage: `url(${bgImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundAttachment: 'fixed' } 
-        : { backgroundColor: '#0f0a0a' }
-      }
+      style={{ backgroundImage: `url(${bgImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundAttachment: 'fixed' }}
     >
       <Header />
       <main className="main-content">

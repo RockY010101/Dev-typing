@@ -79,6 +79,10 @@ function TypingArea({ language, difficulty, onComplete }) {
   const [totalErrors, setTotalErrors] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
 
+  // Live timer
+  const [elapsed, setElapsed] = useState(0); // seconds
+  const timerRef = useRef(null);
+
   useEffect(() => {
     const langData = snippetsData[language];
     if (langData) {
@@ -97,7 +101,19 @@ function TypingArea({ language, difficulty, onComplete }) {
     setStartTime(null);
     setTotalErrors(0);
     setIsFinished(false);
+    setElapsed(0);
+    clearInterval(timerRef.current);
   }, [language, difficulty]);
+
+  // Tick the timer every second while running
+  useEffect(() => {
+    if (startTime && !isFinished) {
+      timerRef.current = setInterval(() => {
+        setElapsed(Math.floor((Date.now() - startTime) / 1000));
+      }, 1000);
+    }
+    return () => clearInterval(timerRef.current);
+  }, [startTime, isFinished]);
 
   useEffect(() => {
     if (inputRef.current && !isFinished) {
@@ -130,16 +146,21 @@ function TypingArea({ language, difficulty, onComplete }) {
       if (val.length === snippet.length) {
         const finishTime = Date.now();
         setIsFinished(true);
+        clearInterval(timerRef.current);
 
-        const timeTakenMinutes = (finishTime - (startTime || Date.now())) / 60000;
+        const timeTakenMs = finishTime - (startTime || finishTime);
+        const timeTakenSeconds = Math.round(timeTakenMs / 1000);
+        setElapsed(timeTakenSeconds);
+
+        const timeTakenMinutes = timeTakenMs / 60000;
         const wordsTyped = snippet.length / 5;
-        const wpm = Math.round(wordsTyped / timeTakenMinutes) || 0;
+        const wpm = Math.round(wordsTyped / (timeTakenMinutes || 1)) || 0;
         
         // Ensure accuracy doesn't go below 0
         const accuracy = Math.max(0, Math.round(((snippet.length - totalErrors) / snippet.length) * 100));
         
         if (onComplete) {
-          onComplete({ wpm, accuracy });
+          onComplete({ wpm, accuracy, timeTaken: timeTakenSeconds });
         }
       }
     }
@@ -176,6 +197,9 @@ function TypingArea({ language, difficulty, onComplete }) {
       <div className="typing-area-header" style={{ justifyContent: 'flex-end' }}>
         <div className="typing-stats">
           <span>{Math.round((userInput.length / snippet.length) * 100 || 0)}%</span>
+          <span className="typing-timer">
+            {String(Math.floor(elapsed / 60)).padStart(2, '0')}:{String(elapsed % 60).padStart(2, '0')}
+          </span>
         </div>
       </div>
       
