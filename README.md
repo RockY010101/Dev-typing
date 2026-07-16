@@ -193,7 +193,7 @@ MIT License
 
 # 👨‍💻 Authors
 
-**RockY010101**
+**RockY010101** and
 **Abhixarvar**
 
 If you found this project useful, consider giving it a ⭐ on GitHub.
