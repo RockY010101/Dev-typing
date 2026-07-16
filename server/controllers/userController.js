@@ -93,6 +93,7 @@ export const getUserProfile = async (req, res) => {
 // @route   PUT /api/users/:id
 // @access  Public
 export const updateUserProfile = async (req, res) => {
+  console.log("updateUserProfile called with body:", req.body, "file:", !!req.file);
   try {
     const user = await User.findById(req.params.id);
 
@@ -128,6 +129,7 @@ export const updateUserProfile = async (req, res) => {
       res.status(404).json({ message: 'User not found' });
     }
   } catch (error) {
+    console.error("Error in updateUserProfile:", error);
     res.status(500).json({ message: error.message });
   }
 };
