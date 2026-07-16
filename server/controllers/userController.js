@@ -88,3 +88,46 @@ export const getUserProfile = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// @desc    Update user profile (name, username, picture)
+// @route   PUT /api/users/:id
+// @access  Public
+export const updateUserProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (user) {
+      if (req.body.name) user.name = req.body.name;
+      
+      if (req.body.username && req.body.username !== user.username) {
+        const existingUser = await User.findOne({ username: req.body.username });
+        if (existingUser) {
+          return res.status(400).json({ message: 'Username is already taken' });
+        }
+        user.username = req.body.username;
+      }
+
+      if (req.file) {
+        // Convert buffer to base64 string
+        const base64Image = req.file.buffer.toString('base64');
+        const mimeType = req.file.mimetype;
+        user.picture = `data:${mimeType};base64,${base64Image}`;
+      }
+
+      await user.save();
+
+      res.json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        username: user.username,
+        picture: user.picture,
+        isNewUser: !user.username
+      });
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

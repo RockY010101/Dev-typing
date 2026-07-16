@@ -10,6 +10,13 @@ function Profile() {
   // Custom Modal State
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [resultToDelete, setResultToDelete] = useState(null);
+
+  // Edit Profile State
+  const [isEditing, setIsEditing] = useState(false);
+  const [editName, setEditName] = useState('');
+  const [editUsername, setEditUsername] = useState('');
+  const [editFile, setEditFile] = useState(null);
+  const [editPreview, setEditPreview] = useState(null);
   
   const navigate = useNavigate();
 
@@ -33,6 +40,34 @@ function Profile() {
   const cancelDelete = () => {
     setShowDeleteModal(false);
     setResultToDelete(null);
+  };
+
+  const handleEditClick = () => {
+    setEditName(dbUser.name || '');
+    setEditUsername(dbUser.username || '');
+    setEditPreview(dbUser.picture || '');
+    setEditFile(null);
+    setIsEditing(true);
+  };
+
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    if (editName) formData.append('name', editName);
+    if (editUsername) formData.append('username', editUsername);
+    if (editFile) formData.append('picture', editFile);
+
+    try {
+      const res = await axios.put(`/api/users/${dbUser._id}`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      setDbUser(res.data);
+      localStorage.setItem('dbUser', JSON.stringify(res.data));
+      setIsEditing(false);
+    } catch (err) {
+      console.error('Error updating profile', err);
+      alert(err.response?.data?.message || 'Error updating profile');
+    }
   };
 
   useEffect(() => {
@@ -86,14 +121,49 @@ function Profile() {
       </div>
 
       <div className="flex flex-col items-center">
-        {dbUser && (
-          <div style={{ backgroundColor: 'rgba(30, 20, 15, 0.95)', border: '1px solid rgba(249, 115, 22, 0.25)', padding: '2rem', borderRadius: '24px', width: '100%', maxWidth: '800px', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '2rem' }}>
+        {dbUser && !isEditing && (
+          <div style={{ backgroundColor: 'rgba(30, 20, 15, 0.95)', border: '1px solid rgba(249, 115, 22, 0.25)', padding: '2rem', borderRadius: '24px', width: '100%', maxWidth: '800px', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '2rem', position: 'relative' }}>
             <img src={dbUser.picture} alt="profile" style={{ width: '100px', height: '100px', borderRadius: '50%', border: '2px solid #f97316' }} />
             <div>
               <h2 style={{ fontFamily: '"Press Start 2P", monospace', color: '#facc15', fontSize: '1.5rem', marginBottom: '0.5rem' }}>{dbUser.username}</h2>
-              <p style={{ color: '#9ca3af' }}>{dbUser.email}</p>
+              <p style={{ color: '#9ca3af' }}>{dbUser.name ? `${dbUser.name} | ${dbUser.email}` : dbUser.email}</p>
             </div>
+            <button onClick={handleEditClick} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'transparent', border: '1px solid #f97316', color: '#f97316', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer', fontFamily: '"Press Start 2P", monospace', fontSize: '0.7rem' }}>
+              Edit Profile
+            </button>
           </div>
+        )}
+
+        {dbUser && isEditing && (
+          <form onSubmit={handleEditSubmit} style={{ backgroundColor: 'rgba(30, 20, 15, 0.95)', border: '1px solid rgba(249, 115, 22, 0.25)', padding: '2rem', borderRadius: '24px', width: '100%', maxWidth: '800px', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+            <h3 style={{ fontFamily: '"Press Start 2P", monospace', color: '#60a5fa', fontSize: '1.2rem', textAlign: 'center', marginBottom: '1rem' }}>Edit Profile</h3>
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <img src={editPreview} alt="preview" style={{ width: '80px', height: '80px', borderRadius: '50%', border: '2px solid #f97316' }} />
+              <input type="file" accept="image/*" onChange={(e) => {
+                const file = e.target.files[0];
+                if (file) {
+                  setEditFile(file);
+                  setEditPreview(URL.createObjectURL(file));
+                }
+              }} style={{ color: 'white' }} />
+            </div>
+            
+            <div>
+              <label style={{ display: 'block', color: '#9ca3af', marginBottom: '0.5rem' }}>Username</label>
+              <input type="text" value={editUsername} onChange={e => setEditUsername(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #374151', backgroundColor: '#111827', color: 'white' }} required />
+            </div>
+
+            <div>
+              <label style={{ display: 'block', color: '#9ca3af', marginBottom: '0.5rem' }}>Name</label>
+              <input type="text" value={editName} onChange={e => setEditName(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #374151', backgroundColor: '#111827', color: 'white' }} />
+            </div>
+
+            <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+              <button type="button" onClick={() => setIsEditing(false)} style={{ flex: 1, padding: '0.75rem', backgroundColor: 'transparent', border: '1px solid #9ca3af', color: '#9ca3af', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>Cancel</button>
+              <button type="submit" style={{ flex: 1, padding: '0.75rem', backgroundColor: '#f97316', border: 'none', color: 'white', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>Save Changes</button>
+            </div>
+          </form>
         )}
 
         <div style={{ width: '100%', maxWidth: '800px' }}>
