@@ -63,6 +63,7 @@ function Profile() {
       });
       setDbUser(res.data);
       localStorage.setItem('dbUser', JSON.stringify(res.data));
+      window.dispatchEvent(new Event('userUpdated'));
       setIsEditing(false);
     } catch (err) {
       console.error('Error updating profile', err);

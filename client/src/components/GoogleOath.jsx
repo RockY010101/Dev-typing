@@ -60,6 +60,18 @@ export default function GoogleAuth() {
     }, [user, navigate]);
 
     useEffect(() => {
+        const handleUserUpdate = () => {
+            const savedDbUser = localStorage.getItem('dbUser');
+            if (savedDbUser) {
+                setDbUser(JSON.parse(savedDbUser));
+            }
+        };
+
+        window.addEventListener('userUpdated', handleUserUpdate);
+        return () => window.removeEventListener('userUpdated', handleUserUpdate);
+    }, []);
+
+    useEffect(() => {
         if (profile && !dbUser) {
             axios.post('/api/users/auth', {
                 email: profile.email,
@@ -115,7 +127,7 @@ export default function GoogleAuth() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 {profile ? (
                     <>
-                        <img src={profile.picture} alt="user profile" style={{ width: '32px', height: '32px', borderRadius: '50%' }} />
+                        <img src={dbUser?.picture || profile.picture} alt="user profile" style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} />
                         {dbUser && !showUsernameModal && (
                             <button className="nav-link" onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }}>
                                 Profile
