@@ -8,7 +8,7 @@ function home() {
           Dev Type
         </h1>
         <p className="home-subtitle">
-          Boost your writing with fun games!
+          Boost your Typing with a FUN game!
         </p>
         <Link 
           to="/practice" 
