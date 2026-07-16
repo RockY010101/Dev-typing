@@ -140,13 +140,19 @@ function Profile() {
             
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <img src={editPreview} alt="preview" style={{ width: '80px', height: '80px', borderRadius: '50%', border: '2px solid #f97316' }} />
-              <input type="file" accept="image/*" onChange={(e) => {
-                const file = e.target.files[0];
-                if (file) {
-                  setEditFile(file);
-                  setEditPreview(URL.createObjectURL(file));
-                }
-              }} style={{ color: 'white' }} />
+              <label style={{ background: 'transparent', border: '1px solid #f97316', color: '#f97316', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer', fontFamily: '"Press Start 2P", monospace', fontSize: '0.7rem' }}>
+                Choose File
+                <input type="file" accept="image/*" onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (file) {
+                    setEditFile(file);
+                    setEditPreview(URL.createObjectURL(file));
+                  }
+                }} style={{ display: 'none' }} />
+              </label>
+              <span style={{ color: '#9ca3af', fontSize: '0.9rem', marginLeft: '1rem' }}>
+                {editFile ? editFile.name : "No file chosen"}
+              </span>
             </div>
             
             <div>
