@@ -66,6 +66,38 @@ const snippetsData = {
       "template<typename T, typename... Args>\nstd::unique_ptr<T> make_unique(Args&&... args) {\n    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));\n}",
       "#include <mutex>\n\nclass ThreadSafeCounter {\n    std::mutex m;\n    int count = 0;\npublic:\n    void increment() {\n        std::lock_guard<std::mutex> lock(m);\n        ++count;\n    }\n};"
     ]
+  },
+  html: {
+    easy: [
+      "<h1>Hello, World!</h1>",
+      "<p>This is a paragraph.</p>",
+      "<a href=\"https://example.com\">Link</a>",
+      "<img src=\"image.jpg\" alt=\"Description\">"
+    ],
+    medium: [
+      "<div class=\"container\">\n  <h1>Title</h1>\n  <p>Description</p>\n</div>",
+      "<ul>\n  <li>Item 1</li>\n  <li>Item 2</li>\n</ul>",
+      "<nav>\n  <a href=\"/\">Home</a>\n  <a href=\"/about\">About</a>\n</nav>"
+    ],
+    hard: [
+      "<form action=\"/submit\" method=\"POST\">\n  <label for=\"name\">Name:</label>\n  <input type=\"text\" id=\"name\" name=\"name\">\n  <button type=\"submit\">Send</button>\n</form>",
+      "<table>\n  <tr>\n    <th>Header</th>\n  </tr>\n  <tr>\n    <td>Data</td>\n  </tr>\n</table>"
+    ]
+  },
+  css: {
+    easy: [
+      "body {\n  margin: 0;\n  padding: 0;\n}",
+      "h1 {\n  color: blue;\n  font-size: 24px;\n}",
+      ".hidden {\n  display: none;\n}"
+    ],
+    medium: [
+      ".container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}",
+      ".card:hover {\n  transform: translateY(-5px);\n  box-shadow: 0 4px 8px rgba(0,0,0,0.2);\n}"
+    ],
+    hard: [
+      "@media (max-width: 768px) {\n  .grid {\n    grid-template-columns: 1fr;\n  }\n  .nav {\n    display: none;\n  }\n}",
+      ".animation {\n  animation: slideIn 1s ease-in-out forwards;\n}\n@keyframes slideIn {\n  from { opacity: 0; }\n  to { opacity: 1; }\n}"
+    ]
   }
 };
 

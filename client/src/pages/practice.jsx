@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaJs, FaPython, FaJava } from 'react-icons/fa6';
+import { FaJs, FaPython, FaJava, FaHtml5, FaCss3Alt } from 'react-icons/fa6';
 import { SiCplusplus } from 'react-icons/si';
 
 function Practice() {
@@ -12,7 +12,9 @@ function Practice() {
     { id: 'js', name: 'JavaScript', color: '#facc15', Icon: FaJs },
     { id: 'py', name: 'Python', color: '#10b981', Icon: FaPython },
     { id: 'java', name: 'Java', color: '#ea580c', Icon: FaJava },
-    { id: 'cpp', name: 'C++', color: '#6366f1', Icon: SiCplusplus }
+    { id: 'cpp', name: 'C++', color: '#6366f1', Icon: SiCplusplus },
+    { id: 'html', name: 'HTML', color: '#e34f26', Icon: FaHtml5 },
+    { id: 'css', name: 'CSS', color: '#264de4', Icon: FaCss3Alt }
   ];
 
   const difficulties = [
