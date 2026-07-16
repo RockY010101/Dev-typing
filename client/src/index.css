@@ -364,17 +364,18 @@ body,
 .typing-stats {
   font-family: 'Press Start 2P', monospace !important;
   color: #f97316;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   white-space: nowrap;
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .typing-timer {
   font-family: 'JetBrains Mono', monospace !important;
-  color: #a78bfa;
-  font-size: 0.75rem;
+  color: #fb923c;
+  font-size: 1.15rem;
   letter-spacing: 0.05em;
   white-space: nowrap;
 }
