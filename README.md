@@ -191,8 +191,9 @@ MIT License
 
 ---
 
-# 👨‍💻 Author
+# 👨‍💻 Authors
 
 **RockY010101**
+**Abhixarvar**
 
 If you found this project useful, consider giving it a ⭐ on GitHub.
