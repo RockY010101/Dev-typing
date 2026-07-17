@@ -39,10 +39,20 @@ Replace these with actual screenshots.
 
 ```
 Landing Page
+<img width="1917" height="896" alt="image" src="https://github.com/user-attachments/assets/1d19a7df-ad73-4ebe-924a-8a813f0c66fb" />
+
 Practice Setup
+<img width="1882" height="880" alt="image" src="https://github.com/user-attachments/assets/93dc0a9f-3ca4-49a5-918f-bcfefe8ff0c5" />
+
 Typing Interface
+<img width="1892" height="863" alt="image" src="https://github.com/user-attachments/assets/d793a8ef-8d1f-4eaf-bcfe-73d76a904811" />
+
 Results
-Dashboard
+<img width="1907" height="875" alt="image" src="https://github.com/user-attachments/assets/c1f71aa9-190d-41e0-824d-0e9656820d90" />
+
+Profile
+<img width="1886" height="873" alt="image" src="https://github.com/user-attachments/assets/a3e677ab-ac17-41a2-9338-e79b1a6a0ef3" />
+
 ```
 
 ---
