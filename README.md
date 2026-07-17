@@ -121,17 +121,6 @@ npm start
 
 ---
 
-# 🔐 Environment Variables
-
-```env
-MONGODB_URI=
-GOOGLE_CLIENT_ID=
-JWT_SECRET=
-PORT=
-```
-
----
-
 # 💻 Tech Stack
 
 | Frontend | Backend | Database | Auth |
