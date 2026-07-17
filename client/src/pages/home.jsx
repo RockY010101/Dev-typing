@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+// import Keyboard from "../components/keyboard/Keyboard";
 
 function home() {
   return (
@@ -16,6 +17,7 @@ function home() {
         >
           START PLAYING &rarr;
         </Link>
+        {/* <Keyboard /> */}
       </div>
     </div>
   );

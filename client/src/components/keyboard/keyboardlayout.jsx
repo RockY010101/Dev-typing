@@ -1,6 +1,6 @@
 export const keyboardRows = [
     [
-        { key: "`" },
+        { key: "Esc" },
         { key: "1" },
         { key: "2" },
         { key: "3" },
@@ -13,11 +13,11 @@ export const keyboardRows = [
         { key: "0" },
         { key: "-" },
         { key: "=" },
-        { key: "Backspace", width: 120 }
+        { key: "Backspace", width: 90 }
     ],
 
     [
-        { key: "Tab", width: 90 },
+        { key: "Tab", width: 60 },
         { key: "Q" },
         { key: "W" },
         { key: "E" },
@@ -30,11 +30,11 @@ export const keyboardRows = [
         { key: "P" },
         { key: "[" },
         { key: "]" },
-        { key: "\\", width: 90 }
+        { key: "\\", width: 60 }
     ],
 
     [
-        { key: "Caps", width: 110 },
+        { key: "Caps", width: 75 },
         { key: "A" },
         { key: "S" },
         { key: "D" },
@@ -46,11 +46,11 @@ export const keyboardRows = [
         { key: "L" },
         { key: ";" },
         { key: "'" },
-        { key: "Enter", width: 130 }
+        { key: "Enter", width: 95 }
     ],
 
     [
-        { key: "Shift", width: 140 },
+        { key: "Shift", width: 100 },
         { key: "Z" },
         { key: "X" },
         { key: "C" },
@@ -61,17 +61,17 @@ export const keyboardRows = [
         { key: "," },
         { key: "." },
         { key: "/" },
-        { key: "Shift", width: 150 }
+        { key: "Shift", width: 110 }
     ],
 
     [
-        { key: "Ctrl", width: 70 },
-        { key: "Win", width: 70 },
-        { key: "Alt", width: 70 },
-        { key: "Space", width: 360 },
-        { key: "Alt", width: 70 },
-        { key: "Fn", width: 70 },
-        { key: "Menu", width: 70 },
-        { key: "Ctrl", width: 70 }
+        { key: "Ctrl", width: 55 },
+        { key: "Win", width: 55 },
+        { key: "Alt", width: 55 },
+        { key: "Space", width: 275 },
+        { key: "Alt", width: 55 },
+        { key: "Fn", width: 55 },
+        { key: "Menu", width: 55 },
+        { key: "Ctrl", width: 55 }
     ]
 ];

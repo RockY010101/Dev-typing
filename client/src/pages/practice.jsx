@@ -35,15 +35,6 @@ function Practice() {
       {/* Top-left navigation */}
       <div style={{ position: 'fixed', top: '1.2rem', left: '1.2rem', display: 'flex', gap: '0.5rem', zIndex: 100 }}>
         <button
-          onClick={() => navigate(-1)}
-          title="Go Back"
-          style={{ background: 'rgba(30,20,15,0.9)', border: '1px solid rgba(249,115,22,0.4)', color: 'white', borderRadius: '8px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '1.2rem', transition: 'all 0.2s' }}
-          onMouseEnter={e => e.currentTarget.style.borderColor = '#f97316'}
-          onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(249,115,22,0.4)'}
-        >
-          &#8592;
-        </button>
-        <button
           onClick={() => navigate('/')}
           title="Go to Home"
           style={{ background: 'rgba(30,20,15,0.9)', border: '1px solid rgba(249,115,22,0.4)', color: 'white', borderRadius: '8px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '1.1rem', transition: 'all 0.2s' }}

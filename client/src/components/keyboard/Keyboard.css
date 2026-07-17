@@ -1,0 +1,72 @@
+.pixel-keyboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  /* Mechanical Keyboard Frame */
+  background-color: #2e3440; 
+  padding: 16px 16px 24px 16px; 
+  border: 4px solid #1a1c23;
+  border-radius: 2px;
+  box-shadow: 
+    inset 4px 4px 0px rgba(255, 255, 255, 0.1),
+    inset -4px -4px 0px rgba(0, 0, 0, 0.4),
+    0 15px 30px rgba(0, 0, 0, 0.8);
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  width: fit-content;
+}
+
+.pixel-keyboard-row {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  width: 100%;
+}
+
+.pixel-key {
+  /* Exact pixel art blocky look */
+  background-color: #555d68; 
+  border: 2px solid #1a1c23; 
+  border-bottom-width: 8px;
+  border-radius: 0; /* Sharp corners for pixel look */
+  
+  color: white;
+  font-family: 'Press Start 2P', monospace !important;
+  font-size: 10px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 48px;
+  box-sizing: border-box;
+  text-transform: uppercase;
+  
+  /* Inner bevel for 3D keycap effect */
+  box-shadow: 
+    inset 2px 2px 0px rgba(255, 255, 255, 0.25), 
+    inset -2px -2px 0px rgba(0, 0, 0, 0.4);
+  
+  /* Snappy linear transition for mechanical feel */
+  transition: border-bottom-width 0.05s linear, transform 0.05s linear, background-color 0.05s linear, box-shadow 0.05s linear;
+  user-select: none;
+}
+
+.pixel-key-content {
+  margin-top: -4px; /* visually center text above the thick bottom */
+  pointer-events: none;
+}
+
+.pixel-key.pressed {
+  border-bottom-width: 2px;
+  transform: translateY(6px);
+  background-color: #4a515a;
+  box-shadow: 
+    inset 2px 2px 0px rgba(0, 0, 0, 0.4), 
+    inset -2px -2px 0px rgba(255, 255, 255, 0.05);
+}
+
+.pixel-key.pressed .pixel-key-content {
+  margin-top: 0;
+}

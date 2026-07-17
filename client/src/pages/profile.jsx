@@ -6,7 +6,7 @@ function Profile() {
   const [dbUser, setDbUser] = useState(null);
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   // Custom Modal State
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [resultToDelete, setResultToDelete] = useState(null);
@@ -17,7 +17,7 @@ function Profile() {
   const [editUsername, setEditUsername] = useState('');
   const [editFile, setEditFile] = useState(null);
   const [editPreview, setEditPreview] = useState(null);
-  
+
   const navigate = useNavigate();
 
   const openDeleteModal = (id) => {
@@ -98,7 +98,7 @@ function Profile() {
 
   return (
     <div className="page-container" style={{ padding: '2rem', color: 'white' }}>
-      
+
       {/* Top-left navigation */}
       <div style={{ position: 'fixed', top: '1.2rem', left: '1.2rem', display: 'flex', gap: '0.5rem', zIndex: 100 }}>
         <button
@@ -138,7 +138,7 @@ function Profile() {
         {dbUser && isEditing && (
           <form onSubmit={handleEditSubmit} style={{ backgroundColor: 'rgba(30, 20, 15, 0.95)', border: '1px solid rgba(249, 115, 22, 0.25)', padding: '2rem', borderRadius: '24px', width: '100%', maxWidth: '800px', marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
             <h3 style={{ fontFamily: '"Press Start 2P", monospace', color: '#60a5fa', fontSize: '1.2rem', textAlign: 'center', marginBottom: '1rem' }}>Edit Profile</h3>
-            
+
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <img src={editPreview} alt="preview" style={{ width: '80px', height: '80px', borderRadius: '50%', border: '2px solid #f97316' }} />
               <label style={{ background: 'transparent', border: '1px solid #f97316', color: '#f97316', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer', fontFamily: '"Press Start 2P", monospace', fontSize: '0.7rem' }}>
@@ -155,7 +155,7 @@ function Profile() {
                 {editFile ? editFile.name : "No file chosen"}
               </span>
             </div>
-            
+
             <div>
               <label style={{ display: 'block', color: '#9ca3af', marginBottom: '0.5rem' }}>Username</label>
               <input type="text" value={editUsername} onChange={e => setEditUsername(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #374151', backgroundColor: '#111827', color: 'white' }} required />
@@ -199,8 +199,8 @@ function Profile() {
                       <td style={{ padding: '1rem', color: '#34d399' }}>{r.timeTaken}s</td>
                       <td style={{ padding: '1rem' }}>{r.language} ({r.difficulty})</td>
                       <td style={{ padding: '1rem' }}>
-                        <button 
-                          onClick={() => openDeleteModal(r._id)} 
+                        <button
+                          onClick={() => openDeleteModal(r._id)}
                           style={{ color: '#ef4444', cursor: 'pointer', background: 'none', border: 'none', fontSize: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}
                           title="Delete Result"
                         >
