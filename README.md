@@ -35,9 +35,8 @@ Practice typing with **real programming code**, improve speed, accuracy and codi
 
 # 📸 Screenshots
 
-Replace these with actual screenshots.
 
-```
+
 Landing Page
 <img width="1917" height="896" alt="image" src="https://github.com/user-attachments/assets/1d19a7df-ad73-4ebe-924a-8a813f0c66fb" />
 
@@ -53,7 +52,7 @@ Results
 Profile
 <img width="1886" height="873" alt="image" src="https://github.com/user-attachments/assets/a3e677ab-ac17-41a2-9338-e79b1a6a0ef3" />
 
-```
+
 
 ---
 
