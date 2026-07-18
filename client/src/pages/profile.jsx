@@ -158,7 +158,7 @@ function Profile() {
 
             <div>
               <label style={{ display: 'block', color: '#9ca3af', marginBottom: '0.5rem' }}>Username</label>
-              <input type="text" value={editUsername} onChange={e => setEditUsername(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #374151', backgroundColor: '#111827', color: 'white' }} required />
+              <input type="text" value={editUsername} onChange={e => setEditUsername(e.target.value)} style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid #374151', backgroundColor: '#111827', color: 'white' }} maxLength={15} required />
             </div>
 
             <div>

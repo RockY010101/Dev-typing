@@ -46,6 +46,10 @@ export const authUser = async (req, res) => {
 export const setUsername = async (req, res) => {
   const { userId, username } = req.body;
 
+  if (username && username.length > 15) {
+    return res.status(400).json({ message: 'Username cannot exceed 15 characters' });
+  }
+
   try {
     const existingUser = await User.findOne({ username });
     if (existingUser) {
@@ -101,6 +105,9 @@ export const updateUserProfile = async (req, res) => {
       if (req.body.name) user.name = req.body.name;
       
       if (req.body.username && req.body.username !== user.username) {
+        if (req.body.username.length > 15) {
+          return res.status(400).json({ message: 'Username cannot exceed 15 characters' });
+        }
         const existingUser = await User.findOne({ username: req.body.username });
         if (existingUser) {
           return res.status(400).json({ message: 'Username is already taken' });
