@@ -6,13 +6,34 @@ import { useNavigate } from 'react-router-dom';
 export default function GoogleAuth() {
     const [user, setUser] = useState(null);
     const [profile, setProfile] = useState(() => {
-        const savedProfile = localStorage.getItem('profile');
-        return savedProfile ? JSON.parse(savedProfile) : null;
+        try {
+            const savedProfile = localStorage.getItem('profile');
+            return (savedProfile && savedProfile !== 'undefined') ? JSON.parse(savedProfile) : null;
+        } catch(e) { return null; }
     });
     const [dbUser, setDbUser] = useState(() => {
-        const savedDbUser = localStorage.getItem('dbUser');
-        return savedDbUser ? JSON.parse(savedDbUser) : null;
+        try {
+            const savedDbUser = localStorage.getItem('dbUser');
+            return (savedDbUser && savedDbUser !== 'undefined') ? JSON.parse(savedDbUser) : null;
+        } catch(e) { return null; }
     });
+
+    useEffect(() => {
+        try {
+            const savedDbUser = localStorage.getItem('dbUser');
+            if (savedDbUser && savedDbUser !== 'undefined') {
+                const user = JSON.parse(savedDbUser);
+                if (user && user._id) {
+                    axios.get(`/api/users/${user._id}`)
+                        .then(res => {
+                            setDbUser(res.data);
+                            localStorage.setItem('dbUser', JSON.stringify(res.data));
+                        })
+                        .catch(err => console.log('Error refreshing user:', err));
+                }
+            }
+        } catch(e) {}
+    }, []);
     
     const [showUsernameModal, setShowUsernameModal] = useState(false);
     const [usernameInput, setUsernameInput] = useState('');

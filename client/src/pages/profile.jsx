@@ -72,24 +72,42 @@ function Profile() {
   };
 
   useEffect(() => {
-    const savedUser = localStorage.getItem('dbUser');
-    if (!savedUser) {
+    try {
+      const savedUser = localStorage.getItem('dbUser');
+      if (!savedUser || savedUser === 'undefined') {
+        navigate('/register');
+        return;
+      }
+
+      const user = JSON.parse(savedUser);
+      if (!user || !user._id) {
+        navigate('/register');
+        return;
+      }
+      setDbUser(user);
+
+      // Refresh user profile data
+      axios.get(`/api/users/${user._id}`)
+        .then(res => {
+          setDbUser(res.data);
+          localStorage.setItem('dbUser', JSON.stringify(res.data));
+        })
+        .catch(err => console.error("Error refreshing profile", err));
+
+      axios.get(`/api/results/user/${user._id}`)
+        .then(res => {
+          setResults(res.data);
+          setLoading(false);
+        })
+        .catch(err => {
+          console.error("Error fetching results", err);
+          setLoading(false);
+        });
+    } catch (e) {
+      console.error("Error loading profile", e);
+      localStorage.removeItem('dbUser');
       navigate('/register');
-      return;
     }
-
-    const user = JSON.parse(savedUser);
-    setDbUser(user);
-
-    axios.get(`/api/results/user/${user._id}`)
-      .then(res => {
-        setResults(res.data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("Error fetching results", err);
-        setLoading(false);
-      });
   }, [navigate]);
 
   if (loading) {
