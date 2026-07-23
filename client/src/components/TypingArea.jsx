@@ -242,6 +242,7 @@ function TypingArea({ language, difficulty, onComplete }) {
       <textarea
         ref={inputRef}
         className="typing-hidden-input"
+        aria-label="Typing input area"
         value={userInput}
         onChange={handleInputChange}
         onKeyDown={(e) => {

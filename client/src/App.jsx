@@ -8,7 +8,7 @@ import Result from './pages/result'
 import Header from './components/header'
 import Register from './pages/register'
 import Profile from './pages/profile'
-import bgImage from './assets/background.png'
+import bgImage from './assets/background.webp'
 
 function App() {
   const location = useLocation();
@@ -26,6 +26,7 @@ function App() {
           muted 
           playsInline
           className="home-video-bg"
+          poster={bgImage}
         >
           <source src="/background.mp4" type="video/mp4" />
         </video>

@@ -221,6 +221,7 @@ function Profile() {
                           onClick={() => openDeleteModal(r._id)}
                           style={{ color: '#ef4444', cursor: 'pointer', background: 'none', border: 'none', fontSize: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}
                           title="Delete Result"
+                          aria-label="Delete Result"
                         >
                           &times;
                         </button>
