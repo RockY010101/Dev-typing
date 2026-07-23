@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import './App.css'
 import Home from './pages/home'
 import Practice from './pages/practice'
@@ -11,12 +11,25 @@ import Profile from './pages/profile'
 import bgImage from './assets/background.png'
 
 function App() {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
 
   return (
     <div 
       className="app-container"
-      style={{ backgroundImage: `url(${bgImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundAttachment: 'fixed' }}
+      style={!isHome ? { backgroundImage: `url(${bgImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundAttachment: 'fixed' } : {}}
     >
+      {isHome && (
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="home-video-bg"
+        >
+          <source src="/background.mp4" type="video/mp4" />
+        </video>
+      )}
       <Header />
       <main className="main-content">
         <Routes>
