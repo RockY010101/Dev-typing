@@ -24,12 +24,6 @@ export const lofiTracks = [
   },
   {
     id: 4,
-    title: "Pixel Chillout",
-    artist: "Arcade Lofi",
-    src: "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=lofi-background-music-18544.mp3"
-  },
-  {
-    id: 5,
     title: "Midnight Dev Session",
     artist: "Retro Code",
     src: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=lofi-chill-medium-version-110098.mp3"
