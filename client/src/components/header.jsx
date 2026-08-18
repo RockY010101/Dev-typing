@@ -1,13 +1,20 @@
 import { useLocation } from "react-router-dom";
 import GoogleAuth from "./GoogleOath";
+import MusicPlayer from "./MusicPlayer";
 
 function Header() {
     const location = useLocation();
-    const isPracticeOpen = location.pathname === '/Practice';
+    const isPracticePage = location.pathname.toLowerCase() === '/practice';
 
     return (
         <header className="header-container">
-            {!isPracticeOpen && (
+            {/* Top Left: Pixelated Lofi Music Player */}
+            <div className="header-left">
+                <MusicPlayer />
+            </div>
+
+            {/* Top Right: Auth & Navigation links */}
+            {!isPracticePage && (
                 <nav className="nav-links">
                     <GoogleAuth />
                 </nav>
@@ -15,4 +22,5 @@ function Header() {
         </header>
     );
 }
+
 export default Header;

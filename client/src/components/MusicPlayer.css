@@ -1,0 +1,168 @@
+/* Pixelated Retro Square Media Control Bar CSS */
+.lofi-bar-container {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  border: 2px solid white;
+  border-radius: 4px;
+  padding: 0.4rem 0.85rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  position: relative;
+  z-index: 100;
+  user-select: none;
+  transition: all 0.2s ease;
+  font-family: 'Press Start 2P', monospace !important;
+}
+
+.lofi-bar-container:hover {
+  background: rgba(0, 0, 0, 0.75);
+  border-color: #f97316;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.8), 0 0 10px rgba(249, 115, 22, 0.3);
+}
+
+.lofi-bar-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  position: relative;
+}
+
+/* Icon Buttons (Volume, Shuffle, Step, Repeat) */
+.lofi-bar-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.lofi-bar-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.lofi-bar-btn:active {
+  transform: translateY(1px);
+}
+
+/* Step Buttons (Backtrack / Next) */
+.lofi-step-btn {
+  color: white;
+  font-size: 1rem;
+}
+
+.lofi-step-btn:hover {
+  background: rgba(249, 115, 22, 0.2);
+  border-color: #f97316;
+  color: #f97316;
+}
+
+/* Toggle Active States (Shuffle / Repeat ON) */
+.lofi-bar-btn.active {
+  color: #f97316;
+  border-color: #f97316;
+  background: rgba(249, 115, 22, 0.15);
+  box-shadow: 0 0 6px rgba(249, 115, 22, 0.4);
+}
+
+.lofi-bar-btn.muted {
+  color: #ef4444;
+}
+
+/* Central Prominent Square Play/Pause Button */
+.lofi-main-square-btn {
+  width: 32px;
+  height: 32px;
+  background: white;
+  border: 2px solid white;
+  border-radius: 4px;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin: 0 0.15rem;
+}
+
+.lofi-main-square-btn:hover {
+  background: #f97316;
+  border-color: #f97316;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
+}
+
+.lofi-main-square-btn:active {
+  transform: translateY(1px);
+}
+
+.square-icon {
+  font-size: 0.9rem;
+}
+
+.play-offset {
+  margin-left: 2px;
+}
+
+/* Autoplay Pulse Prompt */
+.pulse {
+  animation: squarePulse 1.6s infinite alternate;
+}
+
+@keyframes squarePulse {
+  0% { box-shadow: 0 0 4px rgba(255, 255, 255, 0.3); }
+  100% { box-shadow: 0 0 14px rgba(249, 115, 22, 0.8), 0 0 6px rgba(255, 255, 255, 0.6); }
+}
+
+/* Corner Grip Lines (Bottom-Right diagonal stripes) */
+.lofi-corner-grip {
+  position: absolute;
+  right: -6px;
+  bottom: -4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transform: rotate(-45deg);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.lofi-corner-grip span {
+  width: 8px;
+  height: 1.5px;
+  background-color: white;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 640px) {
+  .lofi-bar-container {
+    padding: 0.3rem 0.6rem;
+  }
+
+  .lofi-bar-controls {
+    gap: 0.45rem;
+  }
+
+  .lofi-bar-btn {
+    font-size: 0.8rem;
+    padding: 0.25rem;
+  }
+
+  .lofi-main-square-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .square-icon {
+    font-size: 0.75rem;
+  }
+}

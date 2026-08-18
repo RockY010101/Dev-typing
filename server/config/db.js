@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
+import dns from 'node:dns';
 
 const connectDB = async () => {
   try {
+    dns.setServers(['8.8.8.8', '1.1.1.1']);
     const conn = await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/dev-typing');
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
@@ -11,4 +13,5 @@ const connectDB = async () => {
 };
 
 export default connectDB;
+
 
