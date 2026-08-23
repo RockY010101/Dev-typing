@@ -145,18 +145,31 @@ export default function GoogleAuth() {
 
     return (
         <>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
                 {profile ? (
                     <>
-                        <img src={dbUser?.picture || profile.picture} alt="user profile" style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} />
+                        {/* Row 1: avatar + Profile + Logout */}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                            <img src={dbUser?.picture || profile.picture} alt="user profile" style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} />
+                            {dbUser && !showUsernameModal && (
+                                <button className="nav-link" onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }}>
+                                    Profile
+                                </button>
+                            )}
+                            <button className="nav-link" onClick={logOut} style={{ cursor: 'pointer' }}>
+                                logout
+                            </button>
+                        </div>
+                        {/* Row 2: Leaderboard button */}
                         {dbUser && !showUsernameModal && (
-                            <button className="nav-link" onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }}>
-                                Profile
+                            <button
+                                className="nav-link"
+                                onClick={() => navigate('/leaderboard')}
+                                style={{ cursor: 'pointer', width: '100%', textAlign: 'center' }}
+                            >
+                                Leaderboard
                             </button>
                         )}
-                        <button className="nav-link" onClick={logOut} style={{ cursor: 'pointer' }}>
-                            logout
-                        </button>
                     </>
                 ) : (
                     <button className="nav-link" onClick={() => login()} style={{ cursor: 'pointer' }}>

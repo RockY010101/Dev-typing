@@ -8,6 +8,7 @@ import Result from './pages/result'
 import Header from './components/header'
 import Register from './pages/register'
 import Profile from './pages/profile'
+import Leaderboard from './pages/leaderboard'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import bgImage from './assets/background.webp'
@@ -42,6 +43,7 @@ function App() {
           <Route path="/result" element={<Result />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
         </Routes>
       </main>
       <ToastContainer theme="dark" position="bottom-right" />

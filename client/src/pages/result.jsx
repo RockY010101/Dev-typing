@@ -57,13 +57,20 @@ function Result() {
             <div style={{ color: '#9ca3af', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontFamily: 'sans-serif', fontWeight: 'bold' }}>Time</div>
           </div>
         </div>
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: 'center', display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
           <button 
             onClick={() => navigate('/practice')}
             className="start-typing-btn"
-            style={{ minWidth: '250px' }}
+            style={{ minWidth: '220px' }}
           >
             Try Again &rarr;
+          </button>
+          <button
+            onClick={() => navigate(`/leaderboard?difficulty=${difficulty || 'easy'}`)}
+            className="start-typing-btn"
+            style={{ minWidth: '220px', background: 'linear-gradient(to right, #1d4ed8, #7c3aed)' }}
+          >
+            Leaderboard &rarr;
           </button>
         </div>
       </div>
