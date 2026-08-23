@@ -150,7 +150,21 @@ export default function GoogleAuth() {
                     <>
                         {/* Row 1: avatar + Profile + Logout */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                            <img src={dbUser?.picture || profile.picture} alt="user profile" style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} />
+                            <img 
+                                src={dbUser?.picture || profile.picture} 
+                                alt="user profile" 
+                                onClick={() => dbUser && !showUsernameModal && navigate('/profile')}
+                                style={{ 
+                                    width: '38px', 
+                                    height: '38px', 
+                                    border: '2px solid white', 
+                                    borderRadius: '0', 
+                                    objectFit: 'cover', 
+                                    boxSizing: 'border-box', 
+                                    cursor: 'pointer',
+                                    backgroundColor: 'rgba(0, 0, 0, 0.4)'
+                                }} 
+                            />
                             {dbUser && !showUsernameModal && (
                                 <button className="nav-link" onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }}>
                                     Profile

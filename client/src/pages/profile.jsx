@@ -131,7 +131,7 @@ function Profile() {
       <div className="flex flex-col items-center">
         {dbUser && !isEditing && (
           <div style={{ backgroundColor: 'rgba(30, 20, 15, 0.95)', border: '1px solid rgba(249, 115, 22, 0.25)', padding: '2rem', borderRadius: '24px', width: '100%', maxWidth: '800px', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '2rem', position: 'relative' }}>
-            <img src={dbUser.picture} alt="profile" style={{ width: '100px', height: '100px', borderRadius: '50%', border: '2px solid #f97316' }} />
+            <img src={dbUser.picture} alt="profile" style={{ width: '100px', height: '100px', borderRadius: '0', border: '2px solid #f97316', objectFit: 'cover' }} />
             <div>
               <h2 style={{ fontFamily: '"Press Start 2P", monospace', color: '#facc15', fontSize: '1.5rem', marginBottom: '0.5rem' }}>{dbUser.username}</h2>
               <p style={{ color: '#9ca3af' }}>{dbUser.name ? `${dbUser.name} | ${dbUser.email}` : dbUser.email}</p>
@@ -147,7 +147,7 @@ function Profile() {
             <h3 style={{ fontFamily: '"Press Start 2P", monospace', color: '#60a5fa', fontSize: '1.2rem', textAlign: 'center', marginBottom: '1rem' }}>Edit Profile</h3>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <img src={editPreview} alt="preview" style={{ width: '80px', height: '80px', borderRadius: '50%', border: '2px solid #f97316' }} />
+              <img src={editPreview} alt="preview" style={{ width: '80px', height: '80px', borderRadius: '0', border: '2px solid #f97316', objectFit: 'cover' }} />
               <label style={{ background: 'transparent', border: '1px solid #f97316', color: '#f97316', padding: '0.5rem 1rem', borderRadius: '8px', cursor: 'pointer', fontFamily: '"Press Start 2P", monospace', fontSize: '0.7rem' }}>
                 Choose File
                 <input type="file" accept="image/*" onChange={(e) => {
