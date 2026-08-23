@@ -14,13 +14,17 @@ const resultSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  errors: {
+    type: Number,
+    default: 0
+  },
   timeTaken: {
     type: Number,
     required: true
   },
   language: {
     type: String,
-    default: 'JavaScript' // Default or based on state
+    default: 'JavaScript'
   },
   difficulty: {
     type: String,

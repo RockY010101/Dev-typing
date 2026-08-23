@@ -27,5 +27,11 @@ export const lofiTracks = [
     title: "Midnight Dev Session",
     artist: "Retro Code",
     src: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=lofi-chill-medium-version-110098.mp3"
+  },
+  {
+    id: 5,
+    title: "Coffee Shop",
+    artist: "Pixabay",
+    src: "https://cdn.pixabay.com/audio/2026/07/15/audio_6353298add.mp3"
   }
 ];
