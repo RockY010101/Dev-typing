@@ -8,6 +8,8 @@ import Result from './pages/result'
 import Header from './components/header'
 import Register from './pages/register'
 import Profile from './pages/profile'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import bgImage from './assets/background.webp'
 
 function App() {
@@ -42,6 +44,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </main>
+      <ToastContainer theme="dark" position="bottom-right" />
     </div>
   )
 }

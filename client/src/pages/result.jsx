@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 function Result() {
   const location = useLocation();
@@ -29,7 +30,7 @@ function Result() {
         timeTaken,
         language: language || 'JavaScript',
         difficulty: difficulty || 'easy'
-      }).catch(err => console.error("Error saving result", err));
+      }).catch(err => toast.error("Error saving result: " + (err.response?.data?.message || err.message)));
     }
   }, [wpm, accuracy, timeTaken, language, difficulty, navigate]);
 
@@ -37,28 +38,6 @@ function Result() {
 
   return (
     <div className="page-container">
-
-      {/* Top-left navigation */}
-      <div style={{ position: 'fixed', top: '1.2rem', left: '1.2rem', display: 'flex', gap: '0.5rem', zIndex: 100 }}>
-        <button
-          onClick={() => navigate(-1)}
-          title="Go Back"
-          style={{ background: 'rgba(30,20,15,0.9)', border: '1px solid rgba(249,115,22,0.4)', color: 'white', borderRadius: '8px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '1.2rem', transition: 'all 0.2s' }}
-          onMouseEnter={e => e.currentTarget.style.borderColor = '#f97316'}
-          onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(249,115,22,0.4)'}
-        >
-          &#8592;
-        </button>
-        <button
-          onClick={() => navigate('/')}
-          title="Go to Home"
-          style={{ background: 'rgba(30,20,15,0.9)', border: '1px solid rgba(249,115,22,0.4)', color: 'white', borderRadius: '8px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '1.1rem', transition: 'all 0.2s' }}
-          onMouseEnter={e => e.currentTarget.style.borderColor = '#f97316'}
-          onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(249,115,22,0.4)'}
-        >
-          🏠
-        </button>
-      </div>
 
       <div className="flex flex-col items-center justify-center text-white py-12">
         <h2 style={{ fontFamily: '"Press Start 2P", monospace', textAlign: 'center', color: 'white', fontSize: '2rem', marginBottom: '3rem' }}>Test Complete!</h2>

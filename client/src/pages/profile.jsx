@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Profile() {
   const [dbUser, setDbUser] = useState(null);
@@ -32,8 +33,12 @@ function Profile() {
           setResults(prev => prev.filter(r => r._id !== resultToDelete));
           setShowDeleteModal(false);
           setResultToDelete(null);
+          toast.success("Result deleted!");
         })
-        .catch(err => console.error("Error deleting result", err));
+        .catch(err => {
+          console.error(err);
+          toast.error("Error deleting result");
+        });
     }
   };
 
@@ -65,9 +70,10 @@ function Profile() {
       localStorage.setItem('dbUser', JSON.stringify(res.data));
       window.dispatchEvent(new Event('userUpdated'));
       setIsEditing(false);
+      toast.success("Profile updated successfully!");
     } catch (err) {
-      console.error('Error updating profile', err);
-      alert(err.response?.data?.message || 'Error updating profile');
+      console.error(err);
+      toast.error(err.response?.data?.message || 'Error updating profile');
     }
   };
 
@@ -92,7 +98,10 @@ function Profile() {
           setDbUser(res.data);
           localStorage.setItem('dbUser', JSON.stringify(res.data));
         })
-        .catch(err => console.error("Error refreshing profile", err));
+        .catch(err => {
+          console.error(err);
+          toast.error("Error refreshing profile");
+        });
 
       axios.get(`/api/results/user/${user._id}`)
         .then(res => {
@@ -100,11 +109,13 @@ function Profile() {
           setLoading(false);
         })
         .catch(err => {
-          console.error("Error fetching results", err);
+          console.error(err);
+          toast.error("Error fetching results");
           setLoading(false);
         });
     } catch (e) {
-      console.error("Error loading profile", e);
+      console.error(e);
+      toast.error("Error loading profile");
       localStorage.removeItem('dbUser');
       navigate('/register');
     }
@@ -116,28 +127,6 @@ function Profile() {
 
   return (
     <div className="page-container" style={{ padding: '2rem', color: 'white' }}>
-
-      {/* Top-left navigation */}
-      <div style={{ position: 'fixed', top: '1.2rem', left: '1.2rem', display: 'flex', gap: '0.5rem', zIndex: 100 }}>
-        <button
-          onClick={() => navigate(-1)}
-          title="Go Back"
-          style={{ background: 'rgba(30,20,15,0.9)', border: '1px solid rgba(249,115,22,0.4)', color: 'white', borderRadius: '8px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '1.2rem', transition: 'all 0.2s' }}
-          onMouseEnter={e => e.currentTarget.style.borderColor = '#f97316'}
-          onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(249,115,22,0.4)'}
-        >
-          &#8592;
-        </button>
-        <button
-          onClick={() => navigate('/')}
-          title="Go to Home"
-          style={{ background: 'rgba(30,20,15,0.9)', border: '1px solid rgba(249,115,22,0.4)', color: 'white', borderRadius: '8px', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '1.1rem', transition: 'all 0.2s' }}
-          onMouseEnter={e => e.currentTarget.style.borderColor = '#f97316'}
-          onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(249,115,22,0.4)'}
-        >
-          🏠
-        </button>
-      </div>
 
       <div className="flex flex-col items-center">
         {dbUser && !isEditing && (
