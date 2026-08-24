@@ -15,7 +15,10 @@ import './MusicPlayer.css';
 export default function MusicPlayer() {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(0.8);
+  const [lastVolume, setLastVolume] = useState(0.8);
   const [isMuted, setIsMuted] = useState(false);
+  const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const [isShuffle, setIsShuffle] = useState(false);
   const [isRepeat, setIsRepeat] = useState(false);
   const [autoplayBlocked, setAutoplayBlocked] = useState(false);
@@ -30,10 +33,19 @@ export default function MusicPlayer() {
     }
   }, [isRepeat]);
 
+  // Sync volume with HTML5 audio element
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = isMuted ? 0 : volume;
+      audioRef.current.muted = isMuted;
+    }
+  }, [volume, isMuted]);
+
   // Handle Autoplay & Track changes
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.muted = isMuted;
+      audioRef.current.volume = isMuted ? 0 : volume;
       const playPromise = audioRef.current.play();
       if (playPromise !== undefined) {
         playPromise
@@ -119,11 +131,24 @@ export default function MusicPlayer() {
   // Toggle Mute
   const toggleMute = (e) => {
     if (e) e.stopPropagation();
-    setIsMuted((prev) => {
-      const nextMuted = !prev;
-      if (audioRef.current) audioRef.current.muted = nextMuted;
-      return nextMuted;
-    });
+    if (isMuted) {
+      setIsMuted(false);
+      if (volume === 0) setVolume(lastVolume || 0.8);
+    } else {
+      setLastVolume(volume);
+      setIsMuted(true);
+    }
+  };
+
+  // Handle Volume Slider Change
+  const handleVolumeChange = (e) => {
+    const newVol = parseFloat(e.target.value);
+    setVolume(newVol);
+    if (newVol > 0) {
+      setIsMuted(false);
+    } else {
+      setIsMuted(true);
+    }
   };
 
   // Toggle Shuffle
@@ -148,15 +173,35 @@ export default function MusicPlayer() {
       />
 
       <div className="lofi-bar-controls">
-        {/* 1. Volume Icon */}
-        <button 
-          className={`lofi-bar-btn ${isMuted ? 'muted' : ''}`} 
-          onClick={toggleMute}
-          title={isMuted ? "Unmute" : "Mute"}
-          aria-label="Volume"
+        {/* 1. Volume Icon with Vertical Popup Slider */}
+        <div 
+          className="lofi-volume-wrapper"
+          onMouseEnter={() => setShowVolumeSlider(true)}
+          onMouseLeave={() => setShowVolumeSlider(false)}
         >
-          {isMuted ? <FaVolumeXmark /> : <FaVolumeHigh />}
-        </button>
+          {showVolumeSlider && (
+            <div className="volume-slider-popup" onClick={(e) => e.stopPropagation()}>
+              <input 
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={isMuted ? 0 : volume}
+                onChange={handleVolumeChange}
+                className="vertical-volume-input"
+                aria-label="Volume Slider"
+              />
+            </div>
+          )}
+          <button 
+            className={`lofi-bar-btn ${(isMuted || volume === 0) ? 'muted' : ''}`} 
+            onClick={toggleMute}
+            title={(isMuted || volume === 0) ? "Unmute" : "Mute"}
+            aria-label="Volume"
+          >
+            {(isMuted || volume === 0) ? <FaVolumeXmark /> : <FaVolumeHigh />}
+          </button>
+        </div>
 
         {/* 2. Shuffle Icon */}
         <button 
