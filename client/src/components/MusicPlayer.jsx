@@ -188,7 +188,7 @@ export default function MusicPlayer() {
                 step="0.01"
                 value={isMuted ? 0 : volume}
                 onChange={handleVolumeChange}
-                className="vertical-volume-input"
+                className="horizontal-volume-input"
                 aria-label="Volume Slider"
               />
             </div>
